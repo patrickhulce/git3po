@@ -1,0 +1,17 @@
+dist: trusty
+language: node_js
+cache: yarn
+notifications:
+  email: false
+node_js:
+  - v8
+  - v7
+  - v6
+before_install:
+  - npm install -g coveralls nyc
+script:
+  - npm run test:lint
+  - npm run test:coverage
+after_success:
+  - nyc report --reporter=text-lcov | coveralls || echo 'Failed to upload to coveralls...'
+  # - npm run semantic-release

@@ -1,0 +1,49 @@
+{
+  "name": "git3po",
+  "version": "0.0.0-development",
+  "description": "The best git3po around.",
+  "main": "./lib/index.js",
+  "bin": {
+    "git3po": "./lib/index.js"
+  },
+  "scripts": {
+    "test": "npm run test:lint && npm run test:unit",
+    "test:unit": "mocha --reporter spec 'test/**/*.test.js'",
+    "test:lint": "lint",
+    "test:coverage": "nyc npm run test:unit",
+    "test:watch": "mocha --watch --reporter dot 'test/**/*.test.js'",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patrickhulce/git3po.git"
+  },
+  "author": "Patrick Hulce <patrick.hulce@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/patrickhulce/git3po/issues"
+  },
+  "homepage": "https://github.com/patrickhulce/git3po#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "@patrickhulce/lint": "^1.1.1",
+    "chai": "^4.1.0",
+    "cz-conventional-changelog": "^2.0.0",
+    "mocha": "^3.4.2",
+    "nyc": "^11.0.3",
+    "semantic-release": "^6.3.6",
+    "sinon": "^2.4.1",
+    "sinon-chai": "^2.12.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "js-yaml": "^3.9.0",
+    "superagent": "^3.5.2",
+    "superagent-bluebird-promise": "^4.2.0",
+    "yargs": "^8.0.2"
+  }
+}
