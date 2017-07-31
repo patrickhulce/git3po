@@ -5,4 +5,41 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Dependencies](https://david-dm.org/patrickhulce/git3po.svg)](https://david-dm.org/patrickhulce/git3po)
 
-The best git3po around.
+Automatically comments, labels, and closes GitHub issues according to a configurable set of filters.
+
+## Usage
+
+### Install
+
+`npm install -g git3po`
+
+### Configure
+
+```yaml
+token: <secret>
+repo: patrickhulce/git3po
+startAt: 2017-07-01
+filters:
+  - type: text
+    text: 'test phrase'
+actions:
+  - type: add_comment
+    body: >
+      Hello from the bots
+
+      I'm an awesome multi-line comment
+  - type: add_label
+    label: duplicate
+  - type: close
+```
+
+### Use
+
+```sh
+git3po -c config.yaml
+💎  Found #1 (test phrase), processing...
+     Applying add comment...             ⏳
+     Applying add label...               ⏳
+     Applying close...                   ⏳
+✅  Done with #1
+```
