@@ -1,3 +1,11 @@
 token: secret
 repo: patrickhulce/git3po
 startAt: 2017-01-14
+filters:
+  - type: text
+    text: sample
+  - type: label
+    label: my-label
+    negate: true
+actions:
+  - type: close

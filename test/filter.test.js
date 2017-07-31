@@ -53,5 +53,10 @@ describe('filter.js', () => {
       expect(filter.apply({labels: []})).to.equal(true)
       expect(filter.apply({labels: [{name: 'sample'}]})).to.equal(false)
     })
+
+    it('should throw on unrecognized type', () => {
+      const filter = new Filter({type: 'hello'})
+      expect(() => filter.apply({})).to.throw()
+    })
   })
 })
