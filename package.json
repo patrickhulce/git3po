@@ -41,7 +41,9 @@
   },
   "dependencies": {
     "bluebird": "^3.5.0",
+    "debug": "^2.6.8",
     "js-yaml": "^3.9.0",
+    "lodash": "^4.17.4",
     "superagent": "^3.5.2",
     "superagent-bluebird-promise": "^4.2.0",
     "yargs": "^8.0.2"
