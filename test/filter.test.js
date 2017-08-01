@@ -4,7 +4,7 @@ const Filter = require('../lib/filter')
 describe('filter.js', () => {
   describe('.apply', () => {
     it('should support text filtering', () => {
-      const filter = new Filter({type: 'text', text: 'sample'})
+      const filter = Filter.from({type: 'text', text: 'sample'})
 
       expect(filter.apply({
         title: 'Full sample title example',
@@ -23,7 +23,7 @@ describe('filter.js', () => {
     })
 
     it('should support label filtering', () => {
-      const filter = new Filter({type: 'label', label: 'sample'})
+      const filter = Filter.from({type: 'label', label: 'sample'})
 
       expect(filter.apply({
         labels: [
@@ -41,22 +41,21 @@ describe('filter.js', () => {
     })
 
     it('should support state filtering', () => {
-      const filter = new Filter({type: 'state', state: 'closed'})
+      const filter = Filter.from({type: 'state', state: 'closed'})
 
       expect(filter.apply({state: 'closed'})).to.equal(true)
       expect(filter.apply({state: 'open'})).to.equal(false)
     })
 
     it('should support negation filtering', () => {
-      const filter = new Filter({type: 'label', label: 'sample', negate: true})
+      const filter = Filter.from({type: 'label', label: 'sample', negate: true})
 
       expect(filter.apply({labels: []})).to.equal(true)
       expect(filter.apply({labels: [{name: 'sample'}]})).to.equal(false)
     })
 
     it('should throw on unrecognized type', () => {
-      const filter = new Filter({type: 'hello'})
-      expect(() => filter.apply({})).to.throw()
+      expect(() => Filter.from({type: 'hello'}).apply({})).to.throw()
     })
   })
 })
