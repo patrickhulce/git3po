@@ -4,7 +4,7 @@
   "description": "The best git3po around.",
   "main": "./dist/index.js",
   "bin": {
-    "git3po": "./dist/index.js"
+    "git3po": "./bin/git3po.js"
   },
   "scripts": {
     "build": "babel --out-dir dist/ lib/",
