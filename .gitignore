@@ -1,6 +1,7 @@
 node_modules/
 coverage/
+dist/
 .nyc_output/
-npm-debug.log
+*.log
 
 secret.yaml
