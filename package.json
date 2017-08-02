@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "babel --out-dir dist/ lib/",
+    "build:dev": "npm run build -- --watch",
     "test": "npm run test:lint && npm run test:unit",
     "test:unit": "mocha --reporter spec 'test/**/*.test.js'",
     "test:lint": "lint",
