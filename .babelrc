@@ -7,6 +7,10 @@
           "node": 6
         }
       }
-    ]
+    ],
+    "stage-3"
+  ],
+  "plugins": [
+    "transform-runtime"
   ]
 }
