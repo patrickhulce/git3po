@@ -25,7 +25,7 @@ describe('action.js', () => {
       const body = 'here is a comment'
       const issue = {number: 1234}
       const action = new Action({type: 'add_comment', body})
-      action.apply(githubApi, issue)
+      action.apply(issue, githubApi)
       expect(addComment).to.have.been.calledWith(issue, body)
     })
 
@@ -35,7 +35,7 @@ describe('action.js', () => {
       const label = 'my-label'
       const issue = {number: 1234}
       const action = new Action({type: 'add_label', label})
-      action.apply(githubApi, issue)
+      action.apply(issue, githubApi)
       expect(addLabel).to.have.been.calledWith(issue, label)
     })
 
@@ -43,14 +43,14 @@ describe('action.js', () => {
       const addLabel = sinon.stub(githubApi, 'closeIssue')
       const issue = {number: 1234}
       const action = new Action({type: 'close'})
-      action.apply(githubApi, issue)
+      action.apply(issue, githubApi)
       expect(addLabel).to.have.been.calledWith(issue)
     })
 
     it('should throw on unrecognized type', () => {
       const issue = {number: 1234}
       const action = new Action({type: 'hello'})
-      expect(() => action.apply(githubApi, issue)).to.throw()
+      expect(() => action.apply(issue, githubApi)).to.throw()
     })
   })
 })
