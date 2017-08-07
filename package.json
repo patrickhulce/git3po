@@ -2,7 +2,7 @@
   "name": "git3po",
   "version": "0.0.0-development",
   "description": "The best git3po around.",
-  "main": "./dist/index.js",
+  "main": "./dist/core.js",
   "bin": {
     "git3po": "./bin/git3po.js"
   },
