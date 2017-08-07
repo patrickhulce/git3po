@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const CommentsFilter = require('../../dist/filters/comments-filter')
+const CommentsFilter = require('../../lib/filters/comments-filter')
 
 describe('filters/comments-filter.js', () => {
   let comments = []
