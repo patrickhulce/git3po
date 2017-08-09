@@ -16,7 +16,7 @@ Automatically comments, labels, and closes GitHub issues according to a configur
 ### Configure
 
 ```yaml
-token: <secret>
+token: <secret>  # alternatively set via the `GIT3PO_GH_TOKEN` env variable.
 repo: patrickhulce/git3po
 startAt: 2017-07-01
 filters:
