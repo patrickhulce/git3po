@@ -1,0 +1,31 @@
+# git3po config
+# -------------------------------------------------------------------------------------
+
+# token can be defined here or set with the GIT3PO_GH_TOKEN env variable
+# token: <gh token>
+repo: GoogleChrome/lighthouse
+startAt: '2017-08-02T16:10:40Z'
+filters:
+  - type: text
+    text: 'Unable to load the page:'
+  - type: state
+    state: open
+  - type: comments
+    length: 0
+actions:
+  - type: add_comment
+    body: 'Thanks chief! Appreciate you filing this bug. :clap:
+
+
+  This is a known issue, most well described in #2784. So, **we''ll automatically
+  close this as a duplicate**.
+
+
+  _However_, if you believe your bug is different than the cases described there,
+  please comment here with "necessarily-wide-alpaca" and I''ll reopen this bug. :robot:
+  Beep beep boop.
+
+  '
+  - type: add_label
+    label: duplicate
+  - type: close
