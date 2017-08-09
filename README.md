@@ -33,7 +33,7 @@ actions:
   - type: close
 ```
 
-See also `examples/unable-to-load-page.yaml`.
+See also [`examples/unable-to-load-page.yaml`](./examples/unable-to-load-page.yaml).
 
 ### Use
 
