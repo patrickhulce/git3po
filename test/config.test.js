@@ -21,4 +21,15 @@ describe('config.js', () => {
       expect(config.startAt).to.eql(new Date('2017-01-14'))
     })
   })
+
+  describe('#url', () => {
+    it('should load the url from the yaml config', () => {
+      const config = Config.from(fixture('url-config.yaml'))
+      expect(config.url).to.equal('https://github.privately.hosted.com')
+    })
+    it('should use the default url', () => {
+      const config = Config.from(fixture('config.yaml'))
+      expect(config.url).to.equal('https://api.github.com')
+    })
+  })
 })
