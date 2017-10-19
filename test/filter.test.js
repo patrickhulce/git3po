@@ -30,15 +30,19 @@ describe('filter.js', () => {
     })
 
     it('should work with $match', () => {
-      const predicate = Filter.createPredicate({$match: 'foo'})
+      let predicate = Filter.createPredicate({$match: 'foo'})
       expect(predicate('other foo other')).to.equal(true)
       expect(predicate('other')).to.equal(false)
+      predicate = Filter.createPredicate({$match: ''})
+      expect(predicate('')).to.equal(true)
     })
 
     it('should work with $nmatch', () => {
-      const predicate = Filter.createPredicate({$nmatch: 'foo'})
+      let predicate = Filter.createPredicate({$nmatch: 'foo'})
       expect(predicate('other foo other')).to.equal(false)
       expect(predicate('other')).to.equal(true)
+      predicate = Filter.createPredicate({$nmatch: ''})
+      expect(predicate('')).to.equal(false)
     })
 
     it('should work with $gt', () => {
