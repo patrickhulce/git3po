@@ -87,6 +87,17 @@ describe('filter.js', () => {
       expect(predicate(10)).to.equal(false)
     })
 
+    it('should work with $not', () => {
+      let predicate = Filter.createPredicate({$not: 1})
+      expect(predicate(1)).to.equal(false)
+      expect(predicate(2)).to.equal(true)
+      expect(predicate('foo')).to.equal(true)
+      predicate = Filter.createPredicate({$not: {$in: [1, 2]}})
+      expect(predicate(1)).to.equal(false)
+      expect(predicate(2)).to.equal(false)
+      expect(predicate(3)).to.equal(true)
+    })
+
     it('should work with multiple conditions', () => {
       const predicate = Filter.createPredicate({
         text: {$eq: 'foo'},
