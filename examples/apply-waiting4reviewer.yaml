@@ -1,0 +1,42 @@
+# git3po config
+# -------------------------------------------------------------------------------------
+
+# token can be defined here or set with the GIT3PO_GH_TOKEN env variable
+# token: <gh token>
+repo: GoogleChrome/lighthouse
+pullRequests: true
+startAt: '2017-09-02T16:10:40Z'
+filters:
+  # only look at open PRs
+  - type: state
+    state: open
+  # that don't have the waiting4reviewer or chillin label
+  - type: label
+    label: waiting4reviewer
+    negate: true
+  - type: label
+    label: chillin ❄
+    negate: true
+  # just act on PRs whose last comment was by the committer and contained "PTAL" or
+  # whose last activity was a commit, ignore other comments by the committer since it's usually review acknowledgement
+  - type: latest_activity
+    filter:
+      $not:
+        type: comment
+        text:
+          $nmatch: PTAL
+        author:
+          $eq: '%%author%%'
+    criteria:
+      $or:
+        - type: comment
+          text:
+            $match: PTAL
+          author:
+            $eq: '%%author%%'
+        - type: commit
+actions:
+  - type: add_label
+    label: waiting4reviewer
+  - type: remove_label
+    label: waiting4committer
