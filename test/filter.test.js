@@ -35,6 +35,12 @@ describe('filter.js', () => {
       expect(predicate('other')).to.equal(false)
     })
 
+    it('should work with $nmatch', () => {
+      const predicate = Filter.createPredicate({$nmatch: 'foo'})
+      expect(predicate('other foo other')).to.equal(false)
+      expect(predicate('other')).to.equal(true)
+    })
+
     it('should work with $gt', () => {
       const predicate = Filter.createPredicate({$gt: 5})
       expect(predicate(10)).to.equal(true)
@@ -64,6 +70,47 @@ describe('filter.js', () => {
       expect(predicate(7)).to.equal(false)
       expect(predicate(2)).to.equal(true)
       expect(predicate(10)).to.equal(true)
+    })
+
+    it('should work with $or', () => {
+      const predicate = Filter.createPredicate({
+        $or: [
+          {$eq: 5},
+          {$eq: 7},
+        ],
+      })
+
+      expect(predicate(5)).to.equal(true)
+      expect(predicate(7)).to.equal(true)
+      expect(predicate(1)).to.equal(false)
+      expect(predicate(2)).to.equal(false)
+      expect(predicate(10)).to.equal(false)
+    })
+
+    it('should work with multiple conditions', () => {
+      const predicate = Filter.createPredicate({
+        text: {$eq: 'foo'},
+        other: {$match: 'bar'},
+      })
+
+      expect(predicate({text: 'foo', other: 'bar'})).to.equal(true)
+      expect(predicate({text: 'foo', other: '1bar1'})).to.equal(true)
+      expect(predicate({text: 'foo'})).to.equal(false)
+      expect(predicate({other: 'bar'})).to.equal(false)
+      expect(predicate({})).to.equal(false)
+      expect(predicate(null)).to.equal(false)
+      expect(predicate(1)).to.equal(false)
+      expect(predicate('foo')).to.equal(false)
+    })
+
+    it('should work with multiple mixed conditions', () => {
+      const predicate = Filter.createPredicate({
+        $match: 'foo',
+        length: {$gt: 7},
+      })
+
+      expect(predicate('foo')).to.equal(false)
+      expect(predicate('bar foo baz')).to.equal(true)
     })
   })
 
