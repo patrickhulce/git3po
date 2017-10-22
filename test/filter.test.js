@@ -84,6 +84,21 @@ describe('filter.js', () => {
       expect(predicate([])).to.equal(false)
     })
 
+    it('should work with $and', () => {
+      const predicate = Filter.createPredicate({
+        $and: [
+          {$gt: 5},
+          {$lt: 10},
+        ],
+      })
+
+      expect(predicate(6)).to.equal(true)
+      expect(predicate(7)).to.equal(true)
+      expect(predicate(1)).to.equal(false)
+      expect(predicate(11)).to.equal(false)
+      expect(predicate(10)).to.equal(false)
+    })
+
     it('should work with $or', () => {
       const predicate = Filter.createPredicate({
         $or: [
