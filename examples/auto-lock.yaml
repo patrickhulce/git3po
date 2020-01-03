@@ -1,0 +1,17 @@
+# auto lock closed issues with no activity in the last 3 months
+repo: GoogleChrome/lighthouse
+startAt: 2017-01-01
+filters:
+  - type: issue
+    criteria:
+      state: closed
+      locked: false
+      updatedAt:
+        $lt: '%%date(3 months ago)%%'
+actions:
+  - type: add_comment
+    body: >
+      This issue has been resolved and there has been no further activity, so we're gonna lock it.
+      Please open a new issue if you have a similar issue, and be sure to fill out the template
+      and reference this issue.
+  - type: lock
