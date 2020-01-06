@@ -1,4 +1,7 @@
+/* eslint-disable camelcase */
+
 const expect = require('chai').expect
+const chrono = require('chrono-node')
 const IssueFilter = require('../../lib/filters/issue-filter')
 
 describe('filters/issue-filter.js', () => {
@@ -33,6 +36,20 @@ describe('filters/issue-filter.js', () => {
       expect(filter.apply({
         state: 'open',
         labels: [{name: 'other'}],
+      })).to.equal(false)
+    })
+
+    it('should should preprocess date()', () => {
+      const criteria = {
+        updatedAt: {$lt: '%%date(1 month ago)%%'},
+      }
+
+      const filter = new IssueFilter({criteria})
+      expect(filter.apply({
+        updated_at: chrono.parseDate('2 months ago'),
+      })).to.equal(true)
+      expect(filter.apply({
+        updated_at: chrono.parseDate('2 days ago'),
       })).to.equal(false)
     })
   })
