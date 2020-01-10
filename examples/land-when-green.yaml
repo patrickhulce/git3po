@@ -1,0 +1,19 @@
+# Merge PR's with 'land-when-green' label.
+repo: GoogleChrome/lighthouse
+startAt: 2017-01-01
+pullRequests: true
+filters:
+  - type: issue
+    criteria:
+      state: open
+      mergeable: true
+  - type: label
+    label: land-when-green
+actions:
+  - type: merge
+    # Squash all commits, leave commit message blank.
+    # The commit title (AKA first line of commit message) defaults to the PR title.
+    mergeMethod: squash
+    message: ''
+  - type: remove_label
+    label: land-when-green
