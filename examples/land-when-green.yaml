@@ -7,6 +7,7 @@ filters:
     criteria:
       state: open
       mergeable: true
+      mergeableState: clean
   - type: label
     label: land-when-green
 actions:
@@ -14,6 +15,8 @@ actions:
     # Squash all commits, leave commit message blank.
     # The commit title (AKA first line of commit message) defaults to the PR title.
     mergeMethod: squash
+    # Note: no `title`, so the default (PR title) is used.
+    # Disable the default squash message.
     message: ''
   - type: remove_label
     label: land-when-green
