@@ -28,7 +28,7 @@ function error(...args) {
   console.error(...args)
 }
 
-const configPath = path.join(process.cwd(), argv.config)
+const configPath = path.resolve(process.cwd(), argv.config)
 git3po(Object.assign({configPath, log}, argv))
   .then(() => log('🎉  Finished!'))
   .catch(err => error(`💣  Fatal error: ${err.stack}`) || process.exit(1))
