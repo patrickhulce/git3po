@@ -10,6 +10,10 @@ const argv = yargs
     alias: 'c',
     describe: 'The config file to use',
   })
+  .options('start-at', {
+    alias: 's',
+    describe: 'Date to start at, unix timestamp',
+  })
   .options('dry-run', {
     describe: 'Will not actually make changes',
     default: false,
