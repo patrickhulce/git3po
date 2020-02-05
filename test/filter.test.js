@@ -208,4 +208,48 @@ describe('filter.js', () => {
       expect(() => Filter.from({type: 'hello'}).apply({})).to.throw()
     })
   })
+
+  describe('#preprocess', () => {
+    it('should should preprocess date()', () => {
+      const anHour = 60 * 60 * 1000
+      const criteria = {
+        updatedAt: {$lt: '%%date(30 days ago)%%'},
+      }
+
+      const processed = Filter.preprocess(criteria, {})
+      expect(processed.updatedAt.$lt instanceof Date).to.equal(true)
+      const actual = processed.updatedAt.$lt.getTime()
+      const expected = Date.now() - (30 * 24 * anHour)
+      expect(Math.abs(actual - expected)).to.be.lessThan(24 * anHour)
+    })
+
+    it('should should preprocess author', () => {
+      const criteria = {
+        author: {$neq: '%%author%%'},
+      }
+
+      const processed = Filter.preprocess(criteria, {user: {login: 'patrickhulce'}})
+      expect(processed).to.eql({author: {$neq: 'patrickhulce'}})
+    })
+
+    it('should should preprocess title', () => {
+      const criteria = {
+        text: {$includes: '%%title%%'},
+      }
+
+      const processed = Filter.preprocess(criteria, {title: 'The Bug'})
+      expect(processed).to.eql({text: {$includes: 'The Bug'}})
+    })
+
+    it('should should preprocess reviewer', () => {
+      const criteria = {
+        author: {$eq: '%%reviewer%%'},
+      }
+
+      const reviewers = [{login: 'connorjclark'}]
+       // eslint-disable-next-line camelcase
+      const processed = Filter.preprocess(criteria, {requested_reviewers: reviewers})
+      expect(processed).to.eql({author: {$eq: 'connorjclark'}})
+    })
+  })
 })
