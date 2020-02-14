@@ -43,6 +43,7 @@ See also
 
 * [`examples/unable-to-load-page.yaml`](./examples/unable-to-load-page.yaml)
 * [`examples/apply-waiting4reviewer.yaml`](./examples/apply-waiting4reviewer.yaml)
+* [Many real scripts used by Lighthouse](https://github.com/GoogleChrome/lighthouse/tree/master/lighthouse-core/scripts/git3po-rules)
 
 ### Use
 
