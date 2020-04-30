@@ -15,7 +15,8 @@ actions:
     # Squash all commits, leave commit message blank.
     # The commit title (AKA first line of commit message) defaults to the PR title.
     mergeMethod: squash
-    # Note: no `title`, so the default (PR title) is used.
+    # Note: no `title`, so the default is used. Equal to:
+    # title: '%%title%% (#%%pull_request number%%)'
     # Disable the default squash message.
     message: ''
   - type: remove_label
