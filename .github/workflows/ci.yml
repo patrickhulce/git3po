@@ -2,7 +2,6 @@
 name: CI
 
 on:
-  push:
   pull_request:
 
 jobs:
@@ -22,4 +21,4 @@ jobs:
     - run: npm run test:coverage
 
     - run: nyc report --reporter=text-lcov | coveralls || echo 'Failed to upload to coveralls...'
-    - run: npm run semantic-release
+    # - run: npm run semantic-release
