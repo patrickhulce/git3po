@@ -1,18 +1,19 @@
-
 name: CI
 
 on:
   pull_request:
+  push:
 
 jobs:
   basics:
-    strategy:
-      matrix:
-        node: ['14', '16', '17']
     runs-on: ubuntu-latest
-    name: node ${{ matrix.node }}
 
     steps:
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16.x
+
     - uses: actions/checkout@v2
     - run: npm install -g coveralls nyc
 
@@ -21,4 +22,3 @@ jobs:
     - run: npm run test:coverage
 
     - run: nyc report --reporter=text-lcov | coveralls || echo 'Failed to upload to coveralls...'
-    # - run: npm run semantic-release
