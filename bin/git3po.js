@@ -19,6 +19,7 @@ const argv = yargs
     default: false,
   })
   .demandOption('config')
+  .version()
   .help()
   .argv
 
