@@ -2,18 +2,16 @@
   "name": "git3po",
   "version": "0.0.0-development",
   "description": "The best git3po around.",
-  "main": "./dist/core.js",
+  "main": "./lib/core.js",
   "bin": {
     "git3po": "./bin/git3po.js"
   },
   "scripts": {
-    "build": "babel --out-dir dist/ lib/",
-    "build:dev": "npm run build -- --watch",
     "test": "npm run test:lint && npm run test:unit",
-    "test:unit": "mocha -r babel-register --reporter spec 'test/**/*.test.js'",
+    "test:unit": "mocha --reporter spec 'test/**/*.test.js'",
     "test:lint": "lint",
     "test:coverage": "nyc npm run test:unit",
-    "test:watch": "mocha -r babel-register --watch --reporter dot 'test/**/*.test.js'",
+    "test:watch": "mocha --watch --reporter dot 'test/**/*.test.js'",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {

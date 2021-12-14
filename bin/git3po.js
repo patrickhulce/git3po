@@ -2,7 +2,7 @@
 
 const path = require('path')
 const yargs = require('yargs')
-const git3po = require('../dist/core').git3po
+const git3po = require('../lib/core').git3po
 
 const argv = yargs
   .usage('Usage: $0 [options]')
