@@ -15,9 +15,10 @@ jobs:
         node-version: 16.x
 
     - uses: actions/checkout@v2
-    - run: npm install -g coveralls nyc
 
     - run: npm ci
+    - run: npm install -g --production coveralls
+    
     - run: npm run test:lint
     - run: npm run test:coverage
 
