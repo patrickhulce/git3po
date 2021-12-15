@@ -49,5 +49,8 @@
     "superagent": "^3.5.2",
     "superagent-bluebird-promise": "^4.2.0",
     "yargs": "^8.0.2"
+  },
+  "engines": {
+    "node": ">=14.15"
   }
 }
