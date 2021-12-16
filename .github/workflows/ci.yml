@@ -23,8 +23,21 @@ jobs:
 
     - run: npm ci
     - run: npm install -g --production coveralls
-    
+
     - run: npm run test:lint
     - run: npm run test:coverage
 
     - run: nyc report --reporter=text-lcov | coveralls || echo 'Failed to upload to coveralls...'
+
+  release:
+    runs-on: ubuntu-latest
+    name: release
+    needs: [basics]
+    # only release from the master branch
+    if: github.ref == 'refs/heads/master'
+    steps:
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run semantic-release
