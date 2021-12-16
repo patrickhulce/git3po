@@ -39,6 +39,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 16.x
+    - uses: actions/checkout@v2
     - run: npm ci
     - run: npm run semantic-release
       env:
