@@ -1,0 +1,46 @@
+
+name: CI
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  basics:
+    strategy:
+      matrix:
+        node: ['14', '16', '17']
+    runs-on: ubuntu-latest
+    name: node ${{ matrix.node }}
+
+    steps:
+    - name: Use Node.js ${{ matrix.node }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node }}
+
+    - uses: actions/checkout@v2
+
+    - run: npm ci
+    - run: npm install -g --production coveralls
+
+    - run: npm run test:lint
+    - run: npm run test:coverage
+
+    - run: nyc report --reporter=text-lcov | coveralls || echo 'Failed to upload to coveralls...'
+
+  release:
+    runs-on: ubuntu-latest
+    name: release
+    needs: [basics]
+    # only release from the master branch
+    if: github.ref == 'refs/heads/master'
+    steps:
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run semantic-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
