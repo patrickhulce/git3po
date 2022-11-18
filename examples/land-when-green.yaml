@@ -1,3 +1,4 @@
+# Merge PR's with 'land-when-green' label.
 repo: GoogleChrome/lighthouse
 pullRequests: true
 filters:
