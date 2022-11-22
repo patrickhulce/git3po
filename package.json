@@ -7,7 +7,7 @@
     "git3po": "./bin/git3po.js"
   },
   "scripts": {
-    "test": "npm run test:lint && npm run test:unit",
+    "test": "npm run test:unit",
     "test:unit": "mocha --reporter spec 'test/**/*.test.js'",
     "test:lint": "lint",
     "test:coverage": "nyc npm run test:unit",
