@@ -24,7 +24,6 @@ jobs:
     - run: npm ci
     - run: npm install -g --production coveralls
 
-    - run: npm run test:lint
     - run: npm run test:coverage
 
     - run: nyc report --reporter=text-lcov | coveralls || echo 'Failed to upload to coveralls...'
